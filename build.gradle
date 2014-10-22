@@ -7,4 +7,5 @@ repositories {
 }
 
 dependencies {
+    compile 'net.sf.opencsv:opencsv:2.0'
 }
