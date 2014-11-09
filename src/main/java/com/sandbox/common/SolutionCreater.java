@@ -1,4 +1,4 @@
-package com.sandbox;
+package com.sandbox.common;
 
 import java.util.Random;
 
@@ -13,7 +13,7 @@ public class SolutionCreater {
         return solution;
     }
 
-    enum Color {
+    public enum Color {
         RED, BLUE, YELLOW
     }
 }

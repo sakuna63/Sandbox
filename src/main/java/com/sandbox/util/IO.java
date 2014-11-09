@@ -1,4 +1,4 @@
-package com.sandbox;
+package com.sandbox.util;
 
 public final class IO {
 
