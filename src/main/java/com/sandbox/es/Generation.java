@@ -1,6 +1,6 @@
 package com.sandbox.es;
 
-import com.sandbox.common.SolutionCreater.Color;
+import com.sandbox.common.Color;
 import com.sandbox.common.Solver;
 
 public class Generation implements Comparable<Generation> {

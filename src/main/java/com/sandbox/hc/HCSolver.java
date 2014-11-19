@@ -2,7 +2,7 @@ package com.sandbox.hc;
 
 import com.sandbox.common.AbsSolver;
 import com.sandbox.common.SolutionCreater;
-import com.sandbox.common.SolutionCreater.Color;
+import com.sandbox.common.Color;
 import com.sandbox.common.Solver;
 import com.sandbox.util.Pair;
 
@@ -11,13 +11,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class HCSolver extends AbsSolver<HCProblem> {
+public class HCSolver extends AbsSolver<HCProblem, HCResult> {
     public HCSolver(Random rnd) {
         super(rnd);
     }
 
     @Override
-    public boolean solve(HCProblem problem) {
+    public HCResult solve(HCProblem problem) {
         Color[] solution = SolutionCreater.createSolution(problem.link.length, rnd);
 
         int violationCount = Solver.countViolation(problem.link, solution);
@@ -29,7 +29,9 @@ public class HCSolver extends AbsSolver<HCProblem> {
             problem.violationPoints.add(violationCount);
         }
 
-        return violationCount == 0;
+        HCResult result = new HCResult();
+        result.setSuccess(violationCount == 0);
+        return result;
     }
 
     @SuppressWarnings("unchecked")

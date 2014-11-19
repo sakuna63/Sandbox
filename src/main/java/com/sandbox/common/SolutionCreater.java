@@ -13,7 +13,4 @@ public class SolutionCreater {
         return solution;
     }
 
-    public enum Color {
-        RED, BLUE, YELLOW
-    }
 }

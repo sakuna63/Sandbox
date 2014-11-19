@@ -1,10 +1,8 @@
 package com.sandbox.common;
 
-import com.sandbox.common.SolutionCreater.Color;
+public interface Solver<E extends Problem, T extends Result> {
 
-public interface Solver<E extends Problem> {
-
-    public boolean solve(E problem);
+    public T solve(E problem);
 
     public static int countViolation(boolean[][] link, Color[] solution) {
         int count = 0;

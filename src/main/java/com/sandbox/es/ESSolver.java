@@ -2,19 +2,19 @@ package com.sandbox.es;
 
 import com.sandbox.common.AbsSolver;
 import com.sandbox.common.SolutionCreater;
-import com.sandbox.common.SolutionCreater.Color;
+import com.sandbox.common.Color;
 
 import java.util.Arrays;
 import java.util.Random;
 
-public class ESSolver extends AbsSolver<ESProblem> {
+public class ESSolver extends AbsSolver<ESProblem, ESResult> {
 
     public ESSolver(Random rnd) {
         super(rnd);
     }
 
     @Override
-    public boolean solve(ESProblem problem) {
+    public ESResult solve(ESProblem problem) {
         Generation[] parent = new Generation[problem.mu];
         for (int i = 0; i < parent.length; i++) {
             Color[] solution = SolutionCreater.createSolution(problem.n, rnd);
@@ -34,7 +34,9 @@ public class ESSolver extends AbsSolver<ESProblem> {
             }
         }
 
-        return parent[0].point == 0;
+        ESResult result = new ESResult();
+        result.setSuccess(parent[0].point == 0);
+        return result;
     }
 
     private Generation[] genChildren(ESProblem problem, Generation[] parent) {
