@@ -1,41 +1,34 @@
 package com.sandbox.es;
 
 import com.sandbox.common.AbsSolver;
-import com.sandbox.common.SolutionCreater;
 import com.sandbox.common.Color;
 
 import java.util.Arrays;
 import java.util.Random;
 
-public class ESSolver extends AbsSolver<ESProblem, ESResult> {
+public class ESSolver extends AbsSolver<ESProblem, ESResult, Generation[]> {
 
     public ESSolver(Random rnd) {
         super(rnd);
     }
 
     @Override
-    public ESResult solve(ESProblem problem) {
-        Generation[] parent = new Generation[problem.mu];
-        for (int i = 0; i < parent.length; i++) {
-            Color[] solution = SolutionCreater.createSolution(problem.n, rnd);
-            parent[i] = new Generation(solution);
-            parent[i].calculatePoint(problem.link);
-        }
-
+    public ESResult solve(Generation[] solution, ESProblem problem) {
+        ESResult result = new ESResult();
         for (int i = 0; i < problem.maxGen; i++) {
-            Generation[] children = genChildren(problem, parent);
-            children = problem.selectionType.selectNextGeneration(parent, children);
+            Generation[] children = genChildren(problem, solution);
+            result.count += problem.lamda;
+            children = problem.selectionType.selectNextGeneration(solution, children);
             problem.min.add(children[0].point);
             problem.max.add(children[children.length-1].point);
             problem.ave.add(Arrays.stream(children).mapToInt(c -> c.point).average().getAsDouble());
-            parent = children;
-            if (parent[0].point == 0) {
+            solution = children;
+            if (solution[0].point == 0) {
                 break;
             }
         }
 
-        ESResult result = new ESResult();
-        result.setSuccess(parent[0].point == 0);
+        result.setSuccess(solution[0].point == 0);
         return result;
     }
 

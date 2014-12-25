@@ -6,7 +6,7 @@ import com.sandbox.common.ProblemCreater.Type;
 public class HCProblem extends Problem {
     public final int loop;
 
-    private HCProblem(boolean[][] link, int n, int loop, Type type) {
+    public HCProblem(boolean[][] link, int n, Type type, int loop) {
         super(link, n, type);
         this.loop = loop;
     }

@@ -1,8 +1,8 @@
 package com.sandbox.common;
 
-public interface Solver<E extends Problem, T extends Result> {
+public interface Solver<E extends Problem, T extends Result, V> {
 
-    public T solve(E problem);
+    public T solve(V solution, E problem);
 
     public static int countViolation(boolean[][] link, Color[] solution) {
         int count = 0;

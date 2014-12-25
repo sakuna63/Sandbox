@@ -10,4 +10,6 @@ public abstract class Result {
     public boolean isSuccess() {
         return isSuccess;
     }
+
+    public abstract int count();
 }

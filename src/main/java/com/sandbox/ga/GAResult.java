@@ -8,6 +8,7 @@ public class GAResult extends Result {
     public final ArrayList<Double> min;
     public final ArrayList<Double> max;
     public final ArrayList<Double> ave;
+    public int count;
 
     protected GAResult() {
         min = new ArrayList<>();
@@ -23,5 +24,10 @@ public class GAResult extends Result {
                 ", max=" + max.get(min.size()-1) +
                 ", ave=" + ave.get(min.size()-1) +
                 '}';
+    }
+
+    @Override
+    public int count() {
+        return count;
     }
 }

@@ -1,7 +1,6 @@
 package com.sandbox.hc;
 
 import com.sandbox.common.AbsSolver;
-import com.sandbox.common.SolutionCreater;
 import com.sandbox.common.Color;
 import com.sandbox.common.Solver;
 import com.sandbox.util.Pair;
@@ -11,25 +10,25 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class HCSolver extends AbsSolver<HCProblem, HCResult> {
+public class HCSolver extends AbsSolver<HCProblem, HCResult, Color[]> {
     public HCSolver(Random rnd) {
         super(rnd);
     }
 
     @Override
-    public HCResult solve(HCProblem problem) {
-        Color[] solution = SolutionCreater.createSolution(problem.link.length, rnd);
-
+    public HCResult solve(Color[] solution, HCProblem problem) {
         int violationCount = Solver.countViolation(problem.link, solution);
         int loopCount = 0;
-        while(violationCount > 1 && loopCount++ < problem.loop) {
+        while(violationCount > 1 && loopCount < problem.loop) {
             int index = choiceViolentNode(problem.link, solution);
             switchColor(problem.link, solution, violationCount, index);
             violationCount = Solver.countViolation(problem.link, solution);
             problem.violationPoints.add(violationCount);
+            loopCount++;
         }
 
         HCResult result = new HCResult();
+        result.loop = loopCount;
         result.setSuccess(violationCount == 0);
         return result;
     }
